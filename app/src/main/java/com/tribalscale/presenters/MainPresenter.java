@@ -1,9 +1,12 @@
 package com.tribalscale.presenters;
 
+import com.tribalscale.models.Person;
 import com.tribalscale.network.CoreApi;
 import com.tribalscale.network.responses.GetPeopleResponse;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,7 +21,9 @@ import retrofit2.Retrofit;
  * Created by patel on 6/4/2017.
  */
 
-public class MainPresenter {
+public class MainPresenter extends BasePresenter<MainPresenter.MainView>{
+
+    private static final int NUMBER_OF_RESULTS = 20;
 
     private Retrofit mRetrofit;
 
@@ -28,19 +33,25 @@ public class MainPresenter {
     }
 
     public void getPeople() {
-        mRetrofit.create(CoreApi.class).getPeople()
+        mRetrofit.create(CoreApi.class).getPeople(NUMBER_OF_RESULTS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<GetPeopleResponse>() {
                     @Override
                     public void accept(@NonNull GetPeopleResponse getPeopleResponse) throws Exception {
-                        System.err.println(getPeopleResponse.getResults().size());
+                        getView().showPeople(getPeopleResponse.getResults());
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
+                        getView().showError();
                         throwable.printStackTrace();
                     }
                 });
+    }
+
+    public interface MainView {
+        void showPeople(List<Person> persons);
+        void showError();
     }
 }
