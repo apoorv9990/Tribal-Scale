@@ -1,5 +1,7 @@
 package com.tribalscale.network;
 
+import com.tribalscale.network.responses.GetPeopleResponse;
+
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
@@ -11,5 +13,5 @@ import retrofit2.http.GET;
 
 public interface CoreApi {
     @GET("api/")
-    Observable<JSONObject> getPeople();
+    Observable<GetPeopleResponse> getPeople();
 }

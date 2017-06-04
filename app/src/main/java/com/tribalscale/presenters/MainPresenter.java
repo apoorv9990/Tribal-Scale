@@ -1,6 +1,7 @@
 package com.tribalscale.presenters;
 
 import com.tribalscale.network.CoreApi;
+import com.tribalscale.network.responses.GetPeopleResponse;
 
 import org.json.JSONObject;
 
@@ -27,16 +28,19 @@ public class MainPresenter {
     }
 
     public void getPeople() {
-        mRetrofit.create(CoreApi.class).getPeople().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<JSONObject>() {
-            @Override
-            public void accept(@NonNull JSONObject jsonObject) throws Exception {
-                System.err.println(jsonObject);
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
-                throwable.printStackTrace();
-            }
-        });
+        mRetrofit.create(CoreApi.class).getPeople()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<GetPeopleResponse>() {
+                    @Override
+                    public void accept(@NonNull GetPeopleResponse getPeopleResponse) throws Exception {
+                        System.err.println(getPeopleResponse.getResults().size());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                    }
+                });
     }
 }
