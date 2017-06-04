@@ -2,6 +2,7 @@ package com.tribalscale.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.tribalscale.R;
 import com.tribalscale.TribalScaleApplication;
@@ -12,9 +13,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
-public class MainActivity extends AppCompatActivity implements MainPresenter.MainView{
+public class MainActivity extends AppCompatActivity implements MainPresenter.MainView {
+
+    @BindView(R.id.recycler_view_persons)
+    RecyclerView personsRecyclerView;
 
     @Inject
     MainPresenter presenter;
@@ -23,15 +29,16 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         TribalScaleApplication.getCoreComponent().inject(this);
 
         presenter.attachView(this);
-        presenter.getPeople();
+        presenter.getPersons();
     }
 
     @Override
-    public void showPeople(List<Person> persons) {
+    public void showPersons(List<Person> persons) {
     }
 
     @Override

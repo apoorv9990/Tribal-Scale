@@ -10,6 +10,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        jackOptions {
+            enabled true
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
     }
     buildTypes {
         release {
@@ -25,6 +33,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
@@ -36,13 +45,6 @@ dependencies {
     compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
 
     // Dagger 2
-//    compile ('com.google.dagger:dagger-android:2.11-rc2') {
-//        exclude group: 'com.google.code.findbugs'
-//    }
-//    compile ('com.google.dagger:dagger-android-support:2.11-rc2') {
-//        exclude group: 'com.google.code.findbugs'
-//    } // if you use the support libraries
-//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11-rc2'
     compile ('com.google.dagger:dagger:2.10')
     compile ('com.google.dagger:dagger-android:2.10') {
         exclude group: 'com.google.code.findbugs'

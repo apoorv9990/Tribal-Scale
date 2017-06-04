@@ -2,15 +2,12 @@ package com.tribalscale.presenters;
 
 import com.tribalscale.models.Person;
 import com.tribalscale.network.CoreApi;
-import com.tribalscale.network.responses.GetPeopleResponse;
-
-import org.json.JSONObject;
+import com.tribalscale.network.responses.GetPersonsResponse;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -32,26 +29,19 @@ public class MainPresenter extends BasePresenter<MainPresenter.MainView>{
         mRetrofit = retrofit;
     }
 
-    public void getPeople() {
-        mRetrofit.create(CoreApi.class).getPeople(NUMBER_OF_RESULTS)
+    public void getPersons() {
+        mRetrofit.create(CoreApi.class).getPersons(NUMBER_OF_RESULTS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<GetPeopleResponse>() {
-                    @Override
-                    public void accept(@NonNull GetPeopleResponse getPeopleResponse) throws Exception {
-                        getView().showPeople(getPeopleResponse.getResults());
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
-                        getView().showError();
-                        throwable.printStackTrace();
-                    }
-                });
-    }
+                .subscribe(getPersonsResponse -> getView().showPersons(getPersonsResponse.getResults()),
+                        throwable -> {
+                            getView().showError();
+                            throwable.printStackTrace();
+                        });
+     }
 
     public interface MainView {
-        void showPeople(List<Person> persons);
+        void showPersons(List<Person> persons);
         void showError();
     }
 }

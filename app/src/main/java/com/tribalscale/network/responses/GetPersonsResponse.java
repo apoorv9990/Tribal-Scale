@@ -8,7 +8,7 @@ import java.util.List;
  * Created by patel on 6/4/2017.
  */
 
-public class GetPeopleResponse {
+public class GetPersonsResponse {
     private List<Person> results;
 
     public List<Person> getResults() {
