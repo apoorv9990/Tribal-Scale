@@ -11,6 +11,8 @@ import com.tribalscale.views.viewholders.PersonViewHolder;
 
 /**
  * Created by patel on 6/4/2017.
+ *
+ * Displays persons in a list
  */
 
 public class PersonAdapter extends BaseRecyclerAdapter<Person, PersonViewHolder> {

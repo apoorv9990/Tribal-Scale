@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Created by patel on 6/4/2017.
+ *
+ * Used as a base RecyclerAdapter
  */
 
 public abstract class BaseRecyclerAdapter<T, E extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<E> {

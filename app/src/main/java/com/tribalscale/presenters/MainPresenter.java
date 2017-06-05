@@ -29,6 +29,7 @@ public class MainPresenter extends BasePresenter<MainPresenter.MainView>{
         mCoreApi = coreApi;
     }
 
+    // Fetch the persons list from API call
     public void getPersons() {
         mCoreApi.getPersons(NUMBER_OF_RESULTS)
                 .subscribeOn(Schedulers.io())
@@ -36,18 +37,19 @@ public class MainPresenter extends BasePresenter<MainPresenter.MainView>{
                 .subscribe(new Consumer<GetPersonsResponse>() {
                                @Override
                                public void accept(@NonNull GetPersonsResponse getPersonsResponse) throws Exception {
-                                   MainPresenter.this.getView().showPersons(getPersonsResponse.getResults());
+                                   getView().showPersons(getPersonsResponse.getResults());
                                }
                            },
                         new Consumer<Throwable>() {
                             @Override
                             public void accept(@NonNull Throwable throwable) throws Exception {
-                                MainPresenter.this.getView().showError();
+                                getView().showError();
                                 throwable.printStackTrace();
                             }
                         });
-     }
+    }
 
+    // Used to communicate between the view and presenter
     public interface MainView {
         void showPersons(List<Person> persons);
         void showError();

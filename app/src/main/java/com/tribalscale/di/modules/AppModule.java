@@ -19,6 +19,7 @@ public class AppModule {
         mApplication = application;
     }
 
+    // Provides TribalScaleApplication object through dependency injection
     @Singleton
     @Provides
     TribalScaleApplication providesApplication() {

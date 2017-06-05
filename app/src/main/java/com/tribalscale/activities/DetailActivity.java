@@ -17,6 +17,8 @@ import butterknife.ButterKnife;
 
 /**
  * Created by patel on 6/4/2017.
+ *
+ * Shows the details about the selected person
  */
 
 public class DetailActivity extends AppCompatActivity {

@@ -31,6 +31,7 @@ public class CoreModule {
         this.mBaseUrl = baseUrl;
     }
 
+    // Provides OkHttpClient object through dependency injection
     @Provides
     @Singleton
     OkHttpClient provideOkHttpClient() {
@@ -45,6 +46,7 @@ public class CoreModule {
         return builder.build();
     }
 
+    // Provides CoreApi object through dependency injection
     @Provides
     @Singleton
     CoreApi provideRetrofit(OkHttpClient okHttpClient) {

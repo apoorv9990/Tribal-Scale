@@ -1,7 +1,7 @@
 package com.tribalscale.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -18,8 +18,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 
+/*
+ * Activity that shows the persons list
+ */
 public class MainActivity extends AppCompatActivity implements MainPresenter.MainView {
 
     @BindView(R.id.recycler_view_persons)
