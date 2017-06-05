@@ -23,7 +23,7 @@ import dagger.android.AndroidInjection;
 public class MainActivity extends AppCompatActivity implements MainPresenter.MainView {
 
     @BindView(R.id.recycler_view_persons)
-    RecyclerView personsRecyclerView;
+    public RecyclerView personsRecyclerView;
 
     @Inject
     MainPresenter presenter;

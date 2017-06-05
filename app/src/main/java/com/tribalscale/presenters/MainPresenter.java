@@ -22,15 +22,15 @@ public class MainPresenter extends BasePresenter<MainPresenter.MainView>{
 
     private static final int NUMBER_OF_RESULTS = 20;
 
-    private Retrofit mRetrofit;
+    private CoreApi mCoreApi;
 
     @Inject
-    public MainPresenter(Retrofit retrofit) {
-        mRetrofit = retrofit;
+    public MainPresenter(CoreApi coreApi) {
+        mCoreApi = coreApi;
     }
 
     public void getPersons() {
-        mRetrofit.create(CoreApi.class).getPersons(NUMBER_OF_RESULTS)
+        mCoreApi.getPersons(NUMBER_OF_RESULTS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<GetPersonsResponse>() {

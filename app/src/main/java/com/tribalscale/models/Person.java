@@ -10,6 +10,7 @@ import android.os.Parcelable;
 public class Person implements Parcelable{
     private Name name;
     private Picture picture;
+    private Location location;
 
     public Name getName() {
         return name;
@@ -27,15 +28,25 @@ public class Person implements Parcelable{
         this.picture = picture;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeParcelable(getName(), 0);
         parcel.writeParcelable(getPicture(), 0);
+        parcel.writeParcelable(getLocation(), 0);
     }
 
     private Person(Parcel in) {
         setName((Name) in.readParcelable(Name.class.getClassLoader()));
         setPicture((Picture) in.readParcelable(Picture.class.getClassLoader()));
+        setLocation((Location) in.readParcelable(Location.class.getClassLoader()));
     }
 
     @Override

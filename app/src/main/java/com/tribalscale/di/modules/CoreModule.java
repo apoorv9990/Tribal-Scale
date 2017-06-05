@@ -2,6 +2,7 @@ package com.tribalscale.di.modules;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.tribalscale.network.CoreApi;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -46,14 +47,15 @@ public class CoreModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(OkHttpClient okHttpClient) {
-        Retrofit retrofit = new Retrofit.Builder()
+    CoreApi provideRetrofit(OkHttpClient okHttpClient) {
+        CoreApi retrofit = new Retrofit.Builder()
                 .baseUrl(mBaseUrl)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
-                .build();
+                .build()
+                .create(CoreApi.class);
         return retrofit;
     }
 }
