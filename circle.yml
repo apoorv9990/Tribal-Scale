@@ -3,8 +3,12 @@ machine:
         QEMU_AUDIO_DRV: none
         
 dependencies:
-    override:
-        - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-25.0.3,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+    pre:
+        - echo y | android update sdk --no-ui --all --filter  "android-23"
+        - echo y | android update sdk --no-ui --all --filter  "tools"
+        - echo y | android update sdk --no-ui --all --filter  "platform-tools"
+        - echo y | android update sdk --no-ui --all --filter  "build-tools-25.0.3"
+        #- echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-25.0.3,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
         - echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
         - chmod +x gradlew
         - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
@@ -12,7 +16,7 @@ dependencies:
         #- ./gradlew dependencies 
 
 test:
-    override:
+    pre:
         #assemble the apk if tests were successful
         - ./gradlew clean assembleDebug -PdisablePreDex
 #        # start the emulator
