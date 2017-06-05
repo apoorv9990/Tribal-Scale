@@ -5,12 +5,16 @@
 
     <ImageView
         android:id="@+id/image_detail_avatar"
-        android:layout_width="150dp"
-        android:layout_height="150dp" />
+        android:layout_width="@dimen/avatar_large_size"
+        android:layout_height="@dimen/avatar_large_size"
+        android:layout_marginLeft="@dimen/spacing_s"
+        android:layout_marginTop="@dimen/spacing_s"/>
 
     <TextView
         android:id="@+id/text_detail_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_s"
+        android:layout_marginTop="@dimen/spacing_s"/>
 
 </LinearLayout>
