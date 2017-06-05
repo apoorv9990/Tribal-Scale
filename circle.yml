@@ -1,6 +1,7 @@
 machine:
     environment:
-
+        QEMU_AUDIO_DRV: none
+        
 dependencies:
     override:
         - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-25.0.3,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
