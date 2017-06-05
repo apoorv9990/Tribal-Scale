@@ -38,7 +38,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
 
         TribalScaleApplication.getCoreComponent().inject(this);
 
-        mAdapter = new PersonAdapter(this);
+        mAdapter = new PersonAdapter(this, new PersonAdapter.Interactor() {
+            @Override
+            public void onRowClicked(Person person) {
+                DetailActivity.startDetailActivity(MainActivity.this, person);
+            }
+        });
 
         personsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personsRecyclerView.setAdapter(mAdapter);

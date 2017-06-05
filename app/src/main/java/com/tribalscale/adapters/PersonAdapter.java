@@ -15,8 +15,11 @@ import com.tribalscale.views.viewholders.PersonViewHolder;
 
 public class PersonAdapter extends BaseRecyclerAdapter<Person, PersonViewHolder> {
 
-    public PersonAdapter(Context context) {
+    private Interactor mInteractor;
+
+    public PersonAdapter(Context context, Interactor interactor) {
         super(context);
+        mInteractor = interactor;
     }
 
     @Override
@@ -29,6 +32,10 @@ public class PersonAdapter extends BaseRecyclerAdapter<Person, PersonViewHolder>
     public void onBindViewHolder(PersonViewHolder holder, int position) {
         Person currentPerson = getItem(position);
 
-        holder.bind(currentPerson);
+        holder.bind(currentPerson, mInteractor);
+    }
+
+    public interface Interactor {
+        void onRowClicked(Person person);
     }
 }
