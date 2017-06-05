@@ -33,10 +33,18 @@ public class MainPresenter extends BasePresenter<MainPresenter.MainView>{
         mRetrofit.create(CoreApi.class).getPersons(NUMBER_OF_RESULTS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getPersonsResponse -> getView().showPersons(getPersonsResponse.getResults()),
-                        throwable -> {
-                            getView().showError();
-                            throwable.printStackTrace();
+                .subscribe(new Consumer<GetPersonsResponse>() {
+                               @Override
+                               public void accept(@NonNull GetPersonsResponse getPersonsResponse) throws Exception {
+                                   MainPresenter.this.getView().showPersons(getPersonsResponse.getResults());
+                               }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(@NonNull Throwable throwable) throws Exception {
+                                MainPresenter.this.getView().showError();
+                                throwable.printStackTrace();
+                            }
                         });
      }
 
